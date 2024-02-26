@@ -8,11 +8,18 @@ import "./tailwind-output.css";
 import { queryClient } from "./lib/react-query.ts";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { WeatherDashboard } from "./features/weather-dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        index: true,
+        element: <WeatherDashboard />,
+      },
+    ],
   },
 ]);
 
