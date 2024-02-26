@@ -17,7 +17,9 @@ export const WeatherDashboard = () => {
     <div className="max-w-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Simple Weather Dashboard</h1>
       <WeatherForm onSubmit={handleSubmit} />
-      {isLoading || status === "pending" ? (
+      {status === "pending" ? (
+        <p>Type in the city to look for the weather!</p>
+      ) : isLoading ? (
         <Loader />
       ) : status === "error" ? (
         <ErrorFallback message={error.message} />
