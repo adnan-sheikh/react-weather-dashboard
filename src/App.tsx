@@ -1,14 +1,11 @@
 import { Outlet } from "react-router-dom";
+import { Header } from "./components/Header";
 
 export function App() {
   return (
-    <div className="flex-row h-screen">
-      <header className="bg-slate-500 py-4 px-2 text-white">
-        Weather Dashboard
-      </header>
-      <main>
-        <Outlet />
-      </main>
+    <div className="h-screen flex flex-col">
+      <Header />
+      <Outlet />
     </div>
   );
 }
