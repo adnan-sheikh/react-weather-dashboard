@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ControllerRenderProps, UseFormSetValue } from "react-hook-form";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -11,42 +12,46 @@ import {
   CommandList,
   CommandLoading,
 } from "@/components/ui/command";
+import { FormControl } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useCities } from "../api/useCities";
-import { formatCityLocation, formatCityName } from "../utils";
-import { SelectedCity } from "../types";
 
-export const CitySelect = () => {
+import { formatCityLocation, formatCityName } from "../utils";
+import { SelectedCity, WeatherFormData } from "../types";
+
+type Props = {
+  field: ControllerRenderProps<WeatherFormData, "city">;
+  setValue: UseFormSetValue<WeatherFormData>;
+};
+export const CitySelect = ({ field, setValue }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [city, setCity] = React.useState("");
-  const [selectedCity, setSelectedCity] = React.useState<SelectedCity>();
+  const [selectedCity] = React.useState<SelectedCity>();
   const { data, isFetching, isError } = useCities({ city });
 
   const enabled = !!city;
 
-  const urlParams = new URLSearchParams({
-    lat: `${selectedCity?.lat}`,
-    lon: `${selectedCity?.lon}`,
-    name: `${selectedCity?.name}`,
-  });
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between"
-          value={urlParams.toString()}
-        >
-          {selectedCity ? selectedCity.name : "Select city"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+        <FormControl>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn(
+              "w-full justify-between",
+              !field.value && "text-muted-foreground"
+            )}
+          >
+            {field.value?.name ? field.value.name : "Select city"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </FormControl>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command shouldFilter={false}>
@@ -69,7 +74,7 @@ export const CitySelect = () => {
                     <CommandItem
                       key={formatCityLocation({ lat, lon })}
                       onSelect={() => {
-                        setSelectedCity({
+                        setValue("city", {
                           lat,
                           lon,
                           name: formatCityName({ city: name, state, country }),
