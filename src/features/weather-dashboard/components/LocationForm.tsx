@@ -5,21 +5,21 @@ import {
   CardContent,
   Card,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { WeatherFormData, WeatherFormSchema } from "..";
 import { useSearchParams } from "react-router-dom";
+import { CitySelect } from "./CitySelect";
 
 export const LocationForm = () => {
   const [, setSearchParams] = useSearchParams();
-  const { register, handleSubmit } = useForm<WeatherFormData>({
+  const {  handleSubmit } = useForm<WeatherFormData>({
     resolver: zodResolver(WeatherFormSchema),
   });
 
   const handleFormSubmit = ({ city }: WeatherFormData) => {
+    console.log(city);
     setSearchParams({ city });
   };
 
@@ -38,10 +38,7 @@ export const LocationForm = () => {
           onSubmit={handleSubmit(handleFormSubmit)}
           className="flex flex-col gap-4"
         >
-          <div className="grid gap-1">
-            <Label htmlFor="city">City</Label>
-            <Input id="city" placeholder="Enter a city" {...register("city")} />
-          </div>
+          <CitySelect />
           <Button size="lg" type="submit">
             Get Weather
           </Button>

@@ -14,3 +14,20 @@ export const WeatherFormSchema = z.object({
 });
 
 export type WeatherFormData = z.infer<typeof WeatherFormSchema>;
+
+export const CitiesResponseSchema = z.array(
+  z.object({
+    name: z.string(),
+    local_names: z.record(z.string()).optional(),
+    lat: z.number(),
+    lon: z.number(),
+    country: z.string(),
+    state: z.string().optional(),
+  })
+);
+
+export type SelectedCity = {
+  lat: number;
+  lon: number;
+  name: string;
+};
