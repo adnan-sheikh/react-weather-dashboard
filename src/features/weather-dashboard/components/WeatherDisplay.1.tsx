@@ -1,8 +1,5 @@
-// import { Header } from "@/components/Header";
 import { useSearchParams } from "react-router-dom";
-import { SunriseIcon, SunsetIcon, WindIcon } from "lucide-react";
-import dayjs from "dayjs";
-
+import { SunriseIcon, SunsetIcon, UmbrellaIcon, WindIcon } from "lucide-react";
 import { useWeather } from "../api";
 import { WeatherDisplaySkeleton } from "./WeatherDisplaySkeleton";
 import { ErrorFallback } from "@/components/ErrorFallback";
@@ -20,35 +17,18 @@ export const WeatherDisplay = () => {
   }
 
   if (status === "error") {
-    if (error.response?.status === 404) {
-      return (
-        <ErrorFallback message={`Weather data not found for ${nameFromURL}`} />
-      );
-    }
-    const backendError = error.response
-      ? typeof error.response.data === "object" &&
-        error.response.data &&
-        "message" in error.response.data
+    const backendError = error.response?.data
+      ? "message" in error.response.data
         ? error.response.data.message
         : error.message
       : error.message;
     return (
       <ErrorFallback
-        className="max-w-[800px]"
         message={`Failed to fetch the weather data for ${nameFromURL}. Please try again in a while.`}
-        reason={backendError as string}
+        reason={backendError}
       />
     );
   }
-
-  const sunriseTime = dayjs
-    .unix(data.sys.sunrise)
-    .utcOffset(data.timezone / 60)
-    .format("hh:mm A");
-  const sunsetTime = dayjs
-    .unix(data.sys.sunset)
-    .utcOffset(data.timezone / 60)
-    .format("hh:mm A");
 
   return (
     <>
@@ -58,7 +38,8 @@ export const WeatherDisplay = () => {
           <div className="flex flex-col gap-1.5">
             <h2 className="text-3xl font-semibold">{nameFromURL}</h2>
             <p className="text-gray-500 dark:text-gray-400">
-              {data.weather[0].main} ({data.weather[0].description})
+              {data.current.weather[0].main} (
+              {data.current.weather[0].description})
             </p>
           </div>
           <div className="grid gap-2 md:grid-cols-2">
@@ -67,9 +48,7 @@ export const WeatherDisplay = () => {
                 alt="Weather icon"
                 className="bg-gray-200 rounded-full w-20 h-20 overflow-hidden dark:bg-gray-800"
                 height="100"
-                src={`${import.meta.env.VITE_ICON_URL}/${
-                  data.weather[0].icon
-                }.png`}
+                src="/placeholder.svg"
                 style={{
                   aspectRatio: "100/100",
                   objectFit: "cover",
@@ -77,27 +56,29 @@ export const WeatherDisplay = () => {
                 width="100"
               />
               <div className="grid gap-1.5">
-                <p className="text-4xl font-semibold">{data.main.temp}°C</p>
+                <p className="text-4xl font-semibold">23°C</p>
                 <div className="flex flex-row items-center gap-4">
-                  <p className="text-sm font-medium">
-                    Feels like {data.main.feels_like}°C
-                  </p>
-                  <p className="text-sm">Humidity: {data.main.humidity}%</p>
+                  <p className="text-sm font-medium">Feels like 25°C</p>
+                  <p className="text-sm">Humidity: 72%</p>
                 </div>
               </div>
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex flex-row items-center gap-4">
                 <SunriseIcon className="w-8 h-8 text-gray-500 dark:text-gray-400" />
-                <p>{sunriseTime}</p>
+                <p>6:30 AM</p>
               </div>
               <div className="flex flex-row items-center gap-4">
                 <SunsetIcon className="w-8 h-8 text-gray-500 dark:text-gray-400" />
-                <p>{sunsetTime}</p>
+                <p>8:30 PM</p>
+              </div>
+              <div className="flex flex-row items-center gap-4">
+                <UmbrellaIcon className="w-8 h-8 text-gray-500 dark:text-gray-400" />
+                <p>3% chance of rain</p>
               </div>
               <div className="flex flex-row items-center gap-4">
                 <WindIcon className="w-8 h-8 text-gray-500 dark:text-gray-400" />
-                <p>Wind: {data.wind.speed} m/s</p>
+                <p>Wind: 5 m/s</p>
               </div>
             </div>
           </div>

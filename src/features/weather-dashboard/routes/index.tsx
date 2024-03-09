@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { LocationForm } from "../components/LocationForm";
-import WeatherDisplay from "../components/WeatherDisplay";
+import { WeatherDisplay } from "../components/WeatherDisplay";
 
 export const WeatherDashboard = () => {
   const [searchParams] = useSearchParams();

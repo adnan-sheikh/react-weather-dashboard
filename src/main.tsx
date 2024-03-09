@@ -1,6 +1,8 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 import { App } from "./App.tsx";
 import "./index.css";
@@ -9,6 +11,8 @@ import { queryClient } from "./lib/react-query.ts";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { WeatherDashboard } from "./features/weather-dashboard";
+
+dayjs.extend(utc);
 
 const router = createBrowserRouter([
   {

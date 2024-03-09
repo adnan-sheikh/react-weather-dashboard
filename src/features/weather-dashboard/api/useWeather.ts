@@ -1,28 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { formatCityLocation } from "../utils";
 
-import { WeatherDataSchema } from "../types";
+// import { WeatherDataSchema } from "../types";
 
-const fetchWeatherData = async (city: string) => {
+type Params = {
+  lat: number;
+  lon: number;
+};
+const fetchWeatherData = async ({ lat, lon }: Params) => {
   const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}?q=${city}&appid=${
+    `${import.meta.env.VITE_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${
       import.meta.env.VITE_API_KEY
     }&units=metric`
   );
-  const responseData = {
-    temperature: response.data.temperature,
-    humidity: response.data.humidity,
-    condition: response.data.condition,
-    description: response.data.description,
-  };
-  const data = WeatherDataSchema.parse(responseData);
-  return data;
+  return response.data;
 };
 
-export const useWeather = ({ city }: { city?: string }) => {
+export const useWeather = ({ lat, lon }: Params) => {
   return useQuery({
-    queryKey: ["weather", city],
-    queryFn: () => fetchWeatherData(city!),
-    enabled: !!city,
+    queryKey: ["weather", formatCityLocation({ lat, lon })],
+    queryFn: () => fetchWeatherData({ lat, lon }),
   });
 };
