@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useWeather } from "../api";
 import { WeatherDisplaySkeleton } from "./WeatherDisplaySkeleton";
 import { ErrorFallback } from "@/components/ErrorFallback";
+import { WeatherForecast } from "./WeatherForecast";
 
 export const WeatherDisplay = () => {
   const [searchParams] = useSearchParams();
@@ -102,6 +103,7 @@ export const WeatherDisplay = () => {
             </div>
           </div>
         </div>
+        <WeatherForecast />
       </div>
     </>
   );
