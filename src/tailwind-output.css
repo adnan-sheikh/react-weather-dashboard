@@ -629,6 +629,11 @@ body {
   margin-right: -0.25rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -781,12 +786,40 @@ body {
   width: 350px;
 }
 
+.w-\[800px\] {
+  width: 800px;
+}
+
 .w-\[80px\] {
   width: 80px;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-\[700px\] {
+  width: 700px;
+}
+
+.w-\[650px\] {
+  width: 650px;
+}
+
+.w-\[6px\] {
+  width: 6px;
+}
+
+.w-\[625px\] {
+  width: 625px;
+}
+
+.w-\[622px\] {
+  width: 622px;
+}
+
+.min-w-full {
+  min-width: 100%;
 }
 
 .max-w-2xl {
@@ -803,6 +836,14 @@ body {
 
 .max-w-lg {
   max-width: 32rem;
+}
+
+.max-w-\[600px\] {
+  max-width: 600px;
+}
+
+.max-w-\[700px\] {
+  max-width: 700px;
 }
 
 .flex-1 {
@@ -850,6 +891,18 @@ body {
 
 .scroll-pr-6 {
   scroll-padding-right: 1.5rem;
+}
+
+.scroll-pr-10 {
+  scroll-padding-right: 2.5rem;
+}
+
+.scroll-pr-2 {
+  scroll-padding-right: 0.5rem;
+}
+
+.scroll-pr-3 {
+  scroll-padding-right: 0.75rem;
 }
 
 .flex-row {
@@ -900,10 +953,8 @@ body {
   gap: 1rem;
 }
 
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+.gap-6 {
+  gap: 1.5rem;
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
@@ -1149,6 +1200,11 @@ body {
   line-height: 2.5rem;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1164,9 +1220,8 @@ body {
   line-height: 1rem;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
+.font-bold {
+  font-weight: 700;
 }
 
 .font-medium {
@@ -1175,10 +1230,6 @@ body {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-bold {
-  font-weight: 700;
 }
 
 .leading-none {

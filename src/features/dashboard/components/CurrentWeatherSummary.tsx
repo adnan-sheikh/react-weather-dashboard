@@ -19,7 +19,7 @@ export const CurrentWeatherSummary = ({ data, cityName }: Props) => {
   return (
     <div className="grid gap-4 pt-4 p-6">
       <div className="flex flex-col gap-1.5">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <h2 className="text-3xl font-semibold">{cityName}</h2>
           <Link to="/" title="Back to city search">
             <Cross fill="black" className="rotate-45" />

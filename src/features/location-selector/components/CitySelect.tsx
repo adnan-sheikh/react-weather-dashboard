@@ -53,7 +53,7 @@ export const CitySelect = ({ field, setValue }: Props) => {
           </Button>
         </FormControl>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="min-w-full p-0">
         <Command shouldFilter={false}>
           <CommandInput
             value={city}

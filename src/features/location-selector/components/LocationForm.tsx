@@ -50,38 +50,40 @@ export const LocationForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader className="flex flex-row items-center space-y-0">
-        <div className="grid gap-1.5">
-          <CardTitle>Weather Dashboard</CardTitle>
-          <CardDescription>
-            Enter a city to retrieve the weather information.
-          </CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleFormSubmit)}
-            className="flex flex-col gap-4"
-          >
-            <FormField
-              name="city"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>City</FormLabel>
-                  <CitySelect field={field} setValue={form.setValue} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button size="lg" type="submit">
-              Get Weather
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <div className="w-full max-w-2xl px-6">
+      <Card>
+        <CardHeader className="flex flex-row items-center space-y-0">
+          <div className="grid gap-1.5">
+            <CardTitle>Weather Dashboard</CardTitle>
+            <CardDescription>
+              Enter a city to retrieve the weather information.
+            </CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleFormSubmit)}
+              className="flex flex-col gap-4"
+            >
+              <FormField
+                name="city"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>City</FormLabel>
+                    <CitySelect field={field} setValue={form.setValue} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button size="lg" type="submit">
+                Get Weather
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
