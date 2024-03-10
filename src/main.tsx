@@ -13,6 +13,7 @@ import "./tailwind-output.css";
 import { queryClient } from "./lib/react-query.ts";
 import { WeatherDashboard } from "./features/dashboard";
 import { LocationSelector } from "./features/location-selector";
+import { NotFoundFallback } from "./components/NotFoundFallback.tsx";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <WeatherDashboard />,
+      },
+      {
+        path: "*",
+        element: <NotFoundFallback />,
       },
     ],
   },
