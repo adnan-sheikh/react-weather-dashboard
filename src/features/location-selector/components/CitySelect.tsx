@@ -1,8 +1,6 @@
 import * as React from "react";
-import { ControllerRenderProps, UseFormSetValue } from "react-hook-form";
-import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+import { formatCityLocation, formatCityName } from "@/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,14 +16,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useCities } from "../api/useCities";
+import { ControllerRenderProps, UseFormSetValue } from "react-hook-form";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { formatCityLocation, formatCityName } from "../utils";
-import { SelectedCity, WeatherFormData } from "../types";
+import { useCities } from "../api";
+
+import { SelectedCity, LocationFormData } from "../types";
 
 type Props = {
-  field: ControllerRenderProps<WeatherFormData, "city">;
-  setValue: UseFormSetValue<WeatherFormData>;
+  field: ControllerRenderProps<LocationFormData, "city">;
+  setValue: UseFormSetValue<LocationFormData>;
 };
 export const CitySelect = ({ field, setValue }: Props) => {
   const [open, setOpen] = React.useState(false);

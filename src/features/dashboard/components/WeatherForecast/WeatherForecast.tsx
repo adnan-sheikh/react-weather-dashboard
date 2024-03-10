@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import dayjs from "dayjs";
 
-import { getDay } from "../utils";
+import { getDay } from "../../utils";
 import { ForecastCard } from "./ForecastCard";
 
 export const WeatherForecast = ({ dataAt9AM }: { dataAt9AM: any[] }) => {

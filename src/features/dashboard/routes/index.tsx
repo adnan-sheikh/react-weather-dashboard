@@ -1,5 +1,4 @@
-import { useSearchParams } from "react-router-dom";
-import { LocationForm } from "../components/LocationForm";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { WeatherDisplay } from "../components/WeatherDisplay";
 
 export const WeatherDashboard = () => {
@@ -8,7 +7,7 @@ export const WeatherDashboard = () => {
   const lon = searchParams.get("lon");
   const cityName = searchParams.get("name");
   if (!lat || !lon || !cityName) {
-    return <LocationForm />;
+    return <Navigate to="/" />;
   }
   return <WeatherDisplay />;
 };

@@ -15,13 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { WeatherFormData, WeatherFormSchema } from "../types";
+import { LocationFormData, LocationFormSchema } from "../types";
 import { CitySelect } from "./CitySelect";
 
 export const LocationForm = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const latFromURL = searchParams.get("lat");
   const lonFromURL = searchParams.get("lon");
@@ -34,17 +35,18 @@ export const LocationForm = () => {
     name = nameFromURL;
   }
 
-  const form = useForm<WeatherFormData>({
-    resolver: zodResolver(WeatherFormSchema),
+  const form = useForm<LocationFormData>({
+    resolver: zodResolver(LocationFormSchema),
     defaultValues: { city: { lat, lon, name } },
   });
 
-  const handleFormSubmit = ({ city }: WeatherFormData) => {
-    setSearchParams({
+  const handleFormSubmit = ({ city }: LocationFormData) => {
+    const search = new URLSearchParams({
       lat: `${city.lat}`,
       lon: `${city.lon}`,
       name: `${city.name}`,
     });
+    navigate({ pathname: "/dashboard", search: search.toString() });
   };
 
   return (

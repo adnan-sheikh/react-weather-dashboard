@@ -1,8 +1,7 @@
 import { config } from "@/config";
+import { formatCityLocation } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
-import { formatCityLocation } from "../utils";
 
 type Params = {
   lat: number;
