@@ -1,5 +1,7 @@
+import { config } from "@/config";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+
 import { CitiesResponseSchema } from "../types";
 
 const CITIES_LIMIT = 5;
@@ -12,9 +14,7 @@ const fetchCities = async ({
   signal: AbortSignal;
 }) => {
   const response = await axios.get(
-    `${import.meta.env.VITE_GEO_URL}?q=${city}&limit=${CITIES_LIMIT}&appid=${
-      import.meta.env.VITE_API_KEY
-    }`,
+    `${config.geoUrl}?q=${city}&limit=${CITIES_LIMIT}&appid=${config.apiKey}`,
     { signal }
   );
   return CitiesResponseSchema.parse(response.data);

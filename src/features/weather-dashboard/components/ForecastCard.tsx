@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { config } from "@/config";
 
 type Props = {
   day: string;
@@ -35,7 +36,7 @@ export const ForecastCard = ({
             alt="Weather icon"
             className="bg-gray-200 rounded-full w-8 h-8 overflow-hidden dark:bg-gray-800"
             height="32"
-            src={`${import.meta.env.VITE_ICON_URL}/${icon}.png`}
+            src={`${config.iconUrl}/${icon}.png`}
             style={{ aspectRatio: "100/100", objectFit: "cover" }}
             width="32"
           />

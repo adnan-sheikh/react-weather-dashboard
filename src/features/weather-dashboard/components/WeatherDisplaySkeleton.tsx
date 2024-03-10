@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const WeatherDisplaySkeleton = () => (
-  <div className="w-full flex-1">
+  <div className="w-full flex-1 overflow-auto">
     <div className="flex flex-col gap-4 pt-4 p-6">
       <div className="flex flex-col justify-center gap-1.5 h-[66px]">
         <h2>
@@ -33,12 +33,17 @@ export const WeatherDisplaySkeleton = () => (
             <div key={idx} className="flex flex-row items-center gap-4">
               <Skeleton className="w-[32px] h-[32px]" />
               <p>
-                <Skeleton className="w-[80px] h-[32px] max-w-full" />
+                <Skeleton className="w-[120px] h-[32px] max-w-full" />
               </p>
             </div>
           ))}
         </div>
       </div>
+    </div>
+    <div className="flex flex-col gap-4 px-6 pb-6">
+      {[...Array(5)].map(() => (
+        <Skeleton className="w-full h-[120px]" />
+      ))}
     </div>
   </div>
 );

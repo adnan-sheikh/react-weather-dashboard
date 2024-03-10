@@ -1,5 +1,7 @@
+import { config } from "@/config";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+
 import { formatCityLocation } from "../utils";
 
 // import { WeatherDataSchema } from "../types";
@@ -10,9 +12,7 @@ type Params = {
 };
 const fetchWeatherData = async ({ lat, lon }: Params) => {
   const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${
-      import.meta.env.VITE_API_KEY
-    }&units=metric`
+    `${config.apiUrl}/weather?lat=${lat}&lon=${lon}&appid=${config.apiKey}&units=metric`
   );
   return response.data;
 };
