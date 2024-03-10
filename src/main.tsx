@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 import { App } from "./App.tsx";
 import "./index.css";
@@ -13,6 +14,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { WeatherDashboard } from "./features/weather-dashboard";
 
 dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const router = createBrowserRouter([
   {

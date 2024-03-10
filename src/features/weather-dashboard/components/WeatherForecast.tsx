@@ -11,18 +11,32 @@ export const WeatherForecast = () => {
 
   const { data } = useWeatherForecast({ lat, lon });
 
+  const dataAt3PM =
+    data?.list.filter((item: any) => {
+      const timestamp = item.dt;
+      const date = dayjs.unix(timestamp).utc();
+      const hour = date.format("HH:mm");
+      return hour === "15:00";
+    }) ?? [];
+
+  console.log(dataAt3PM);
+
   return (
-    <div className="flex flex-col gap-4">
-      {data?.list.map((item: any) => {
+    <div className="flex flex-col gap-4 px-6 pb-6">
+      {dataAt3PM.map((item: any) => {
         const { dt, main, weather } = item;
         const day = formatUnixTime(dt);
+        const date = dayjs.unix(dt).utc();
+        const time = date.format("HH:mm A");
         return (
           <ForecastCard
             day={day}
+            time={time}
             maxTemp={main.temp_max}
             minTemp={main.temp_min}
             weather={weather[0].main}
             weatherDescription={weather[0].description}
+            icon={weather[0].icon}
           />
         );
       })}
@@ -32,13 +46,12 @@ export const WeatherForecast = () => {
 
 function formatUnixTime(unixTime: number) {
   const now = dayjs();
-  const futureDate = dayjs.unix(unixTime);
-
+  const futureDate = dayjs.unix(unixTime).utc();
   if (futureDate.isSame(now, "day")) {
     return "Today";
   } else if (futureDate.isSame(now.add(1, "day"), "day")) {
     return "Tomorrow";
   } else {
-    return futureDate.format("dddd"); // Returns the day of the week
+    return futureDate.format("dddd");
   }
 }
