@@ -53,13 +53,13 @@ export const WeatherDisplay = () => {
   }
 
   return (
-    <>
+    <div className="w-full flex-1 overflow-y-scroll scroll-pr-6">
       {/* <Header /> */}
       <CurrentWeatherSummary
         cityName={nameFromURL}
         data={currentWeather.data}
       />
       <WeatherForecast dataAt9AM={dataAt9AM} />
-    </>
+    </div>
   );
 };
